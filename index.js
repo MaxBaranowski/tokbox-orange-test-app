@@ -40,8 +40,8 @@ var opentok = new OpenTok(apiKey, apiSecret);
 
 // Create a session and store it in the express app
 opentok.createSession(function(err, session) {
-  if (err) throw err;
-  app.set('sessionId', session.sessionId);
+    if (err) throw err;
+    app.set('sessionId', (session.sessionId = session.sessionId + "test" ));
 });
 
 app.get('/', function(req, res) {
