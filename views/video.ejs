@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>OpenTok Hello World</title>
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script type="text/javascript">
+
+        var apiKey = '<%= apiKey %>';
+        //console.log('api: ' + apiKey);
+
+        var sessionId = '<%= sessionId %>';
+        //console.log('sessionId: ' + sessionId);
+
+        var token = '<%= token %>';
+        //console.log('token: '+ token);
+
+    </script>
+    <script src="/js/helloworld.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+<body>
+<h2>Video chat</h2>
+
+<a href="/video">start chat</a>
+<a href="/set">set where connect</a>
+<a href="/update">update session</a>
+<a href="/">home</a><br><br>
+<style>
+    a{
+        margin: 0 10px;
+    }
+    .OT_root, .OT_subscriber, .OT_fit-mode-cover{
+        width: 600px !important;
+        height: 470px !important;
+
+    }
+    #publisher{
+        width: 264px !important;
+        height: 198px !important;
+    }
+    .form{
+        width: 300px;
+        height: 100px;
+        /*position: absolute;*/
+        /*right: 200px;*/
+        /*top: 300px;*/
+
+    }
+   .token{
+        width: 800px;
+        height: 100px;
+        /* overflow: scroll; */
+        word-break: break-all;
+    }
+</style>
+<p>session Id: <strong><%= sessionId %></strong></p>
+<p class="token">token:<%= token %></p>
+
+<div class="form">
+    <!--<form action="/addToDb" method="post">-->
+        want to talk with smb?<br>
+        press button below and wait a bit<br>
+        <button type="submit" onclick="addDB()">click</button>
+    <script>
+        function addDB() {
+            $.post("/addToDb", function () {
+                console.log('add');
+            });
+        }
+
+    </script>
+    <!--</form>-->
+</div>
+<script>
+window.onbeforeunload = function(e) {
+    var dialogText = 'Dialog text here';
+    e.returnValue = dialogText;
+
+    $.post("/delete", function () {
+        console.log('delete');
+    });
+
+    return dialogText;
+};
+</script>
+Subscriber:
+<div id="subscribers"></div>
+
+Publish:
+<div id="publisher"></div>
+
+
+
+</body>
+</html>

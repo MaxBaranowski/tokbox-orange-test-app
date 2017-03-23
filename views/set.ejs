@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>Set page </h2>
+<a href="/video">start chat</a>
+<a href="/set">set where connect</a>
+<a href="/update">update session</a>
+<a href="/">home</a><br><br>
+<style>
+    a{
+        margin: 0 10px;
+    }
+</style>
+
+
+
+You cant type session yourself:
+<form action="/setSessId" method="post">
+    <input type="text" id="sessId" style="width: 1000px;" name="id">
+    <button type="submit">click</button>
+</form>
+or<br>
+Choose session what now in use:
+<div id="list">
+    <% for(var i = 0; i < result.length; i++){ %>
+    <p>session: <strong style="cursor: pointer;"><%= result[i].session %></strong></p>
+    <% } %>
+</div>
+<script>
+    window.onload = function() {
+        var list = document.getElementById("list").children;
+        for(key in list){
+//        console.log(list[key].innerText);
+            list[key].addEventListener("click", function () {
+//                console.log(this.innerText.slice(9));
+                var input = document.getElementById("sessId");
+                input.value = this.innerText.slice(9);
+            })
+        }
+    }
+
+</script>
+</body>
+</html>
